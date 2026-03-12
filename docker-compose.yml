@@ -1,0 +1,35 @@
+services:
+
+  postgres:
+    image: postgres:15
+    container_name: zaza-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: zaza
+      POSTGRES_PASSWORD: zaza
+      POSTGRES_DB: zaza
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7
+    container_name: zaza-redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: zaza-backend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://zaza:zaza@postgres:5432/zaza
+      REDIS_URL: redis://redis:6379
+      PORT: 3000
+    depends_on:
+      - postgres
+      - redis

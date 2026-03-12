@@ -1,0 +1,13 @@
+{
+  "name": "zaza-backend",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "build": "echo build step placeholder"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
